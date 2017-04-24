@@ -1,0 +1,13 @@
+resource_type
+identity
+drug
+status
+is_brand
+is_over_the_counter
+form
+ingredients
+package
+dose
+next_dose_time
+perscriber
+refill_date

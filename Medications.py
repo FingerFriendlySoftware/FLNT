@@ -1,32 +1,48 @@
-import json
-import pprint
+
+class Reference:
+
+    def __init__(self,*args,**kwargs):
+
+        self.class_to_build = kwargs.pop("class_to_make", None)
+        self.class_kwarguments = kwargs
+        self.class_arguments = args
+
+    def create_new_class(self):
+
+        temp = self.class_to_build(*self.class_arguments, **self.class_kwarguments)
+        return temp
 
 
-def openandprint(file, *args, **kwargs ):
 
-    with open(file) as json_data:
-        obj = json.load(json_data)
+class DictionaryStarter:
 
-        for member in obj:
-            print(member)
+    def __init__(self,*args,**kwargs):
 
-       # print(json.dumps(obj, indent=4))
+        self.equivalence_list = kwargs.pop("equivalence", None)
+        values = kwargs.pop("values", None)
+        # equivalence is a dictionary with the matching equivalence
+        base_variables = kwargs.pop("base", None)
+        new_dict = dict(zip(self.equivalence_list.values(), self.equivalence_list.keys()))
 
-    return obj
+        for value in values:
+            if value in new_dict:
+                self.__dict__[new_dict[value]] = values[value]
 
-basic = {"resource_type":"resourceType",
-         "identity":"id",
-         "drug":"code",
-         "status":"status",
-         "is_brand":"isBrand",
-         "is_over_the_counter":"isOverTheCounter",
-         "form": "form",
-         "ingredients":"ingredient",
-         "package":"package"}
+    def convert_to_dic(self, *args, **kwargs):
 
+        to_convert = kwargs.get("new_names",self.equivalence_list)
+        returner = dict()
 
-class Medication:
-    empty = ""
+        for names in to_convert:
+            # print (names)
+            # print("in for loop")
+            if self.__dict__[names] is not None:
+                # print("in if statement")
+                returner[to_convert[names]] = self.__dict__[names]
+
+        return returner
+
+class ListStarter:
 
     def __init__(self,*args,**kwargs):
 
@@ -81,14 +97,24 @@ class Medication:
             self.perscriber = kwargs.pop("perscriber", None)
             self.refill_date = kwargs.pop("refill_date", None)
 
+    def convert_to_dic(self, *args, **kwargs):
+
+        to_convert = kwargs.get("new_names",self.equivalence_list)
+        returner = dict()
+
+
+        for names in to_convert:
+            print (names)
+            print("in for loop")
+            if self.__dict__[names] is not None:
+                print("in if statement")
+                returner[to_convert[names]] = self.__dict__[names]
+
+        return returner
 
 
 
 
 
-med = openandprint("medication0301.json")
 
-test = Medication(equivalence = basic, values = med)
-
-print(json.dumps(vars(test),indent=4))
-
+print(dir())
