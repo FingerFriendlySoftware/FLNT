@@ -15,6 +15,12 @@ def openandprint(file, *args, **kwargs ):
 
     return obj
 
+code = {"reference":"system",
+        "drugID":"code",
+        "name":"display"}
+
+codes = Reference()
+
 
 basic = {"resource_type":"resourceType",
          "identity":"id",
@@ -43,8 +49,8 @@ med = openandprint("medication0301.json")
 
 pray = Reference(equivalence = basic, values = med, class_to_make = DictionaryStarter)
 
-test = pray.create_new_class()
-#test = DictionaryStarter(equivalence = basic, values = med)
+
+test = DictionaryStarter(equivalence = basic, values = med)
 
 if isinstance(test.resource_type, str):
     print("you didnt fuck up")
@@ -52,6 +58,7 @@ if isinstance(test.resource_type, str):
 
 #print(json.dumps(vars(test),indent=4))
 
-edited = test.convert_to_dic()
+edited = test.convert_to_dic(new_names=ugly)
 
-#print(json.dumps(edited,indent=4))
+print(json.dumps(edited,indent=4))
+

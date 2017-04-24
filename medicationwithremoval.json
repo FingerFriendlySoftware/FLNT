@@ -35,6 +35,28 @@
           "code": "mL"
         }
       }
+    },
+        {
+      "itemCodeableConcept": {
+        "coding":{
+            "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+            "code": "28934983984",
+            "display": "water"
+          }
+      },
+      "isActive": false,
+      "amount": {
+        "numerator": {
+          "value": 500,
+          "system": "http://unitsofmeasure.org",
+          "code": "mg"
+        },
+        "denominator": {
+          "value": 10,
+          "system": "http://unitsofmeasure.org",
+          "code": "mL"
+        }
+      }
     }
   ],
   "package": {
